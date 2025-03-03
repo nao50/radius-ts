@@ -1,6 +1,6 @@
 // src/client.ts
 import dgram from "dgram";
-import { RadiusPacket } from "./packet";
+import { RadiusPacket } from "./radius-packet";
 
 export class RadiusClient {
 	private socket: dgram.Socket;
@@ -20,7 +20,7 @@ export class RadiusClient {
 				if (err) reject(err);
 			});
 			this.socket.once("message", (msg) => {
-				const response = RadiusPacket.decode(msg);
+				const response = RadiusPacket.decode(msg, 'secret');
 				resolve(response);
 			});
 		});

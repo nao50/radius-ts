@@ -91,6 +91,22 @@ async function main() {
                     msg: 'Sending EAP-Response/Identity',
                   });
                   break;
+                case EapTypes.MD5Challenge:
+                    // MD5 Challengeに対し、NACを送信してEAP-TLSを希望
+                    const nakResponse = new EapPacket(
+                      EapCodes.Response,
+                      response.identifier,
+                      EapTypes.Nak,
+                      Buffer.from([EapTypes.TLS]) // Desired Auth Type
+                    );
+                    packet.deleteAttribute(rfc2869AttributeTypes['EAP_Message']);
+                    packet.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: nakResponse.encode() });
+                    logger.info({
+                      user: 'testuser',
+                      code: 'Access-Request',
+                      msg: 'Sending EAP-Response/Nak (desiring EAP-TLS)',
+                    });
+                    break;
 
                 case EapTypes.TLS:
                   // ④ Access-Challengeを受けて ⑤ Access-Requestを生成（EAP-Response/TLS Client Hello）

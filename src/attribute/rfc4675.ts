@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4675
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc4675AttributeTypes = {
   'Egress_VLANID': 56,
@@ -12,11 +12,12 @@ export type rfc4675AttributeType = typeof rfc4675AttributeTypes[keyof typeof rfc
 
 export const rfc4675 = {
   getEgressVLANID(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc4675AttributeTypes['Egress_VLANID']);
+    const avp = packet.getAttribute(rfc4675AttributeTypes['Egress_VLANID']);
+    return avp?.value;
   },
 
   setEgressVLANID(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc4675AttributeTypes['Egress_VLANID'], value);
+    packet.addAttribute({ type: rfc4675AttributeTypes['Egress_VLANID'], value: Buffer.from(value) });
   },
 
   deleteEgressVLANID(packet: RadiusPacket): void {
@@ -24,20 +25,21 @@ export const rfc4675 = {
   },
 
   getAllEgressVLANID(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc4675AttributeTypes['Egress_VLANID']);
+    return packet.getAllAttributes(rfc4675AttributeTypes['Egress_VLANID']).map(avp => avp.value);
   },
 
   getEgressVLANIDString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc4675AttributeTypes['Egress_VLANID']);
+    const value = this.getEgressVLANID(packet);
     return value?.toString('utf8');
   },
 
   getIngressFilters(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc4675AttributeTypes['Ingress_Filters']);
+    const avp = packet.getAttribute(rfc4675AttributeTypes['Ingress_Filters']);
+    return avp?.value;
   },
 
   setIngressFilters(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc4675AttributeTypes['Ingress_Filters'], value);
+    packet.addAttribute({ type: rfc4675AttributeTypes['Ingress_Filters'], value: Buffer.from(value) });
   },
 
   deleteIngressFilters(packet: RadiusPacket): void {
@@ -45,20 +47,21 @@ export const rfc4675 = {
   },
 
   getAllIngressFilters(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc4675AttributeTypes['Ingress_Filters']);
+    return packet.getAllAttributes(rfc4675AttributeTypes['Ingress_Filters']).map(avp => avp.value);
   },
 
   getIngressFiltersString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc4675AttributeTypes['Ingress_Filters']);
+    const value = this.getIngressFilters(packet);
     return value?.toString('utf8');
   },
 
   getEgressVLANName(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc4675AttributeTypes['Egress_VLAN_Name']);
+    const avp = packet.getAttribute(rfc4675AttributeTypes['Egress_VLAN_Name']);
+    return avp?.value;
   },
 
   setEgressVLANName(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc4675AttributeTypes['Egress_VLAN_Name'], value);
+    packet.addAttribute({ type: rfc4675AttributeTypes['Egress_VLAN_Name'], value: Buffer.from(value) });
   },
 
   deleteEgressVLANName(packet: RadiusPacket): void {
@@ -66,20 +69,21 @@ export const rfc4675 = {
   },
 
   getAllEgressVLANName(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc4675AttributeTypes['Egress_VLAN_Name']);
+    return packet.getAllAttributes(rfc4675AttributeTypes['Egress_VLAN_Name']).map(avp => avp.value);
   },
 
   getEgressVLANNameString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc4675AttributeTypes['Egress_VLAN_Name']);
+    const value = this.getEgressVLANName(packet);
     return value?.toString('utf8');
   },
 
   getUserPriorityTable(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc4675AttributeTypes['User_Priority_Table']);
+    const avp = packet.getAttribute(rfc4675AttributeTypes['User_Priority_Table']);
+    return avp?.value;
   },
 
   setUserPriorityTable(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc4675AttributeTypes['User_Priority_Table'], value);
+    packet.addAttribute({ type: rfc4675AttributeTypes['User_Priority_Table'], value: Buffer.from(value) });
   },
 
   deleteUserPriorityTable(packet: RadiusPacket): void {
@@ -87,11 +91,11 @@ export const rfc4675 = {
   },
 
   getAllUserPriorityTable(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc4675AttributeTypes['User_Priority_Table']);
+    return packet.getAllAttributes(rfc4675AttributeTypes['User_Priority_Table']).map(avp => avp.value);
   },
 
   getUserPriorityTableString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc4675AttributeTypes['User_Priority_Table']);
+    const value = this.getUserPriorityTable(packet);
     return value?.toString('utf8');
   },
 

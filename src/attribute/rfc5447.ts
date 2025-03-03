@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5447
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc5447AttributeTypes = {
   'MIP6_Feature_Vector': 124,
@@ -10,11 +10,12 @@ export type rfc5447AttributeType = typeof rfc5447AttributeTypes[keyof typeof rfc
 
 export const rfc5447 = {
   getMIP6FeatureVector(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5447AttributeTypes['MIP6_Feature_Vector']);
+    const avp = packet.getAttribute(rfc5447AttributeTypes['MIP6_Feature_Vector']);
+    return avp?.value;
   },
 
   setMIP6FeatureVector(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5447AttributeTypes['MIP6_Feature_Vector'], value);
+    packet.addAttribute({ type: rfc5447AttributeTypes['MIP6_Feature_Vector'], value: Buffer.from(value) });
   },
 
   deleteMIP6FeatureVector(packet: RadiusPacket): void {
@@ -22,20 +23,21 @@ export const rfc5447 = {
   },
 
   getAllMIP6FeatureVector(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5447AttributeTypes['MIP6_Feature_Vector']);
+    return packet.getAllAttributes(rfc5447AttributeTypes['MIP6_Feature_Vector']).map(avp => avp.value);
   },
 
   getMIP6FeatureVectorString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5447AttributeTypes['MIP6_Feature_Vector']);
+    const value = this.getMIP6FeatureVector(packet);
     return value?.toString('utf8');
   },
 
   getMIP6HomeLinkPrefix(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5447AttributeTypes['MIP6_Home_Link_Prefix']);
+    const avp = packet.getAttribute(rfc5447AttributeTypes['MIP6_Home_Link_Prefix']);
+    return avp?.value;
   },
 
   setMIP6HomeLinkPrefix(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5447AttributeTypes['MIP6_Home_Link_Prefix'], value);
+    packet.addAttribute({ type: rfc5447AttributeTypes['MIP6_Home_Link_Prefix'], value: Buffer.from(value) });
   },
 
   deleteMIP6HomeLinkPrefix(packet: RadiusPacket): void {
@@ -43,11 +45,11 @@ export const rfc5447 = {
   },
 
   getAllMIP6HomeLinkPrefix(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5447AttributeTypes['MIP6_Home_Link_Prefix']);
+    return packet.getAllAttributes(rfc5447AttributeTypes['MIP6_Home_Link_Prefix']).map(avp => avp.value);
   },
 
   getMIP6HomeLinkPrefixString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5447AttributeTypes['MIP6_Home_Link_Prefix']);
+    const value = this.getMIP6HomeLinkPrefix(packet);
     return value?.toString('utf8');
   },
 

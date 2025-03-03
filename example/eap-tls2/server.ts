@@ -56,65 +56,123 @@ async function main() {
 
     // RFC 2869, Section 5.4: 初回のAccess-RequestにEAP-Messageが必須
     if (!eapMessage) {
+      // PAP/CHAP Handler
       throw new Error('Initial Access-Request must include EAP-Message');
     }
 
     const eapCode = eapMessage.readUInt8(0); // EAP Code
     const eapType = eapMessage.readUInt8(4); // EAP Type
 
-    console.log('eapCode', eapCode)
-    console.log('eapType', eapType)
-
     switch (eapCode) {
       case EapCodes.Response:
         switch (eapType) {
           case EapTypes.Identity:
-            // ① Access-Request (EAP-Response/Identity) を受けて② Access-Challenge (EAP-Request/TLS Start) を生成
-            // RFC 3748, Section 5.1: クライアントが自発的にEAP-Response/Identityを送信可能
-            const eapPacketStart = eapHandler.processIdentityResponse(packet, eapMessage);
+            // // ① Access-Request (EAP-Response/Identity) を受けて② Access-Challenge (EAP-Request/TLS Start) を生成
+            // // RFC 3748, Section 5.1: クライアントが自発的にEAP-Response/Identityを送信可能
+            // const eapPacketStart = eapHandler.processIdentityResponse(packet, eapMessage);
+            // response.code = RADIUS_ACCESS_CHALLENGE;
+            // response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketStart.encode() });
+            // logger.info({
+            //   user: username,
+            //   code: 'Access-Challenge',
+            //   msg: 'Sending EAP-Request/TLS Start',
+            // });
+            // break;
+            // ① Identityを受けてMD5 Challengeを送信
+            const eapPacketMD5 = eapHandler.processMD5Challenge(packet);
             response.code = RADIUS_ACCESS_CHALLENGE;
-            response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketStart.encode() });
+            response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketMD5.encode() });
             logger.info({
               user: username,
               code: 'Access-Challenge',
-              msg: 'Sending EAP-Request/TLS Start',
+              msg: 'Sending EAP-Request/MD5-Challenge',
             });
             break;
 
+          case EapTypes.MD5Challenge:
+          case EapTypes.Nak:
+            const desiredTypes = eapHandler.extractDesiredEapTypes(eapMessage);
+            if (desiredTypes.length > 0) {
+              const supportedType = desiredTypes.find(type => eapHandler.isEapTypeSupported(type));
+              if (supportedType === EapTypes.TLS) {
+                const eapPacketNext = eapHandler.startEapTls(packet);
+                response.code = RADIUS_ACCESS_CHALLENGE;
+                response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketNext.encode() });
+                logger.info({
+                    user: username,
+                    code: 'Access-Challenge',
+                    msg: 'Sending EAP-Request/TLS Start after Nak',
+                });
+              } else {
+                // サポートされていない場合、EAP-Failure を送信
+                const eapFailure = eapHandler.createFailureResponse(packet);
+                response.code = RADIUS_ACCESS_REJECT;
+                response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapFailure.encode() });
+                logger.warn({
+                    user: username,
+                    code: 'Access-Reject',
+                    cause: `Unsupported EAP type requested in Nak: ${desiredTypes}`,
+                });
+              }
+            }
+            break;
           case EapTypes.TLS:
-            // ③ Access-Request (EAP-Response/TLS Client Hello) を受けて④ Access-Challenge (EAP-Request/TLS Server Hello, Cert) を生成
-            // RFC 5216, Section 3.2: EAP-TLS Client Helloを受け取り、Server Helloを返す
-            const eapPacketTls = eapHandler.processTlsClientHello(packet, eapMessage);
-            response.code = RADIUS_ACCESS_CHALLENGE;
-            response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketTls.encode() });
-            logger.info({
-              user: username,
-              code: 'Access-Challenge',
-              msg: 'Sending EAP-Request/TLS Server Hello, Cert or Fragmented Data',
-            });
-
-            // RFC 5216, Section 2.2: Mフラグでフラグメント処理を確認
-            if (eapPacketTls.flags & FLAG_MORE_FRAGMENTS) {
-              response.code = RADIUS_ACCESS_CHALLENGE;
-              response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketTls.encode() });
-              logger.debug({
-                user: username,
-                msg: 'Sending additional EAP-Request/TLS Fragmented Data',
-              });
-            }
-
-            // ⑤～⑦ Access-Request (EAP-Response/TLS Client Response or Fragmented Data) を受けて⑧ Access-Accept (EAP-Success) を生成
-            if (eapHandler.isTlsHandshakeComplete(packet)) {
-              const eapSuccess = eapHandler.completeTlsHandshake(packet);
-              response.code = RADIUS_ACCESS_ACCEPT;
-              response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapSuccess.encode() });
-              logger.info({
-                user: username,
-                code: 'Access-Accept',
-                msg: 'Sending EAP-Success',
-              });
+            const tlsSession = eapHandler.getTlsSession(packet); // セッション状態を確認
+            if (!tlsSession.initialized) {
+                // 初回はstartフラグのみ送信
+                const eapPacketStart = eapHandler.startEapTls(packet);
+                response.code = RADIUS_ACCESS_CHALLENGE;
+                response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketStart.encode() });
+                logger.info({
+                    user: username,
+                    code: 'Access-Challenge',
+                    msg: 'Sending EAP-Request/TLS Start',
+                });
+            } else {
+                // クライアントの応答後、TLSハンドシェイクを継続
+                const eapPacketNext = eapHandler.processTlsClientHello(packet, eapMessage);
+                response.code = RADIUS_ACCESS_CHALLENGE;
+                response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketNext.encode() });
+                logger.info({
+                    user: username,
+                    code: 'Access-Challenge',
+                    msg: 'Sending EAP-Request/TLS ServerHello',
+                });
             }
             break;
+            // // ③ Access-Request (EAP-Response/TLS Client Hello) を受けて④ Access-Challenge (EAP-Request/TLS Server Hello, Cert) を生成
+            // // RFC 5216, Section 3.2: EAP-TLS Client Helloを受け取り、Server Helloを返す
+            // const eapPacketTls = eapHandler.processTlsClientHello(packet, eapMessage);
+            // response.code = RADIUS_ACCESS_CHALLENGE;
+            // response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketTls.encode() });
+            // logger.info({
+            //   user: username,
+            //   code: 'Access-Challenge',
+            //   msg: 'Sending EAP-Request/TLS Server Hello, Cert or Fragmented Data',
+            // });
+
+            // // RFC 5216, Section 2.2: Mフラグでフラグメント処理を確認
+            // if (eapPacketTls.flags & FLAG_MORE_FRAGMENTS) {
+            //   response.code = RADIUS_ACCESS_CHALLENGE;
+            //   response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapPacketTls.encode() });
+            //   logger.debug({
+            //     user: username,
+            //     msg: 'Sending additional EAP-Request/TLS Fragmented Data',
+            //   });
+            // }
+
+            // // ⑤～⑦ Access-Request (EAP-Response/TLS Client Response or Fragmented Data) を受けて⑧ Access-Accept (EAP-Success) を生成
+            // if (eapHandler.isTlsHandshakeComplete(packet)) {
+            //   const eapSuccess = eapHandler.completeTlsHandshake(packet);
+            //   response.code = RADIUS_ACCESS_ACCEPT;
+            //   response.addAttribute({ type: rfc2869AttributeTypes['EAP_Message'], value: eapSuccess.encode() });
+            //   logger.info({
+            //     user: username,
+            //     code: 'Access-Accept',
+            //     msg: 'Sending EAP-Success',
+            //   });
+            // }
+            // break;
 
           default:
             // 不正なEAPタイプの場合

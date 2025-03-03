@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5090
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc5090AttributeTypes = {
   'Digest_Response': 103,
@@ -28,11 +28,12 @@ export type rfc5090AttributeType = typeof rfc5090AttributeTypes[keyof typeof rfc
 
 export const rfc5090 = {
   getDigestResponse(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Response']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Response']);
+    return avp?.value;
   },
 
   setDigestResponse(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Response'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Response'], value: Buffer.from(value) });
   },
 
   deleteDigestResponse(packet: RadiusPacket): void {
@@ -40,20 +41,21 @@ export const rfc5090 = {
   },
 
   getAllDigestResponse(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Response']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Response']).map(avp => avp.value);
   },
 
   getDigestResponseString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Response']);
+    const value = this.getDigestResponse(packet);
     return value?.toString('utf8');
   },
 
   getDigestRealm(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Realm']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Realm']);
+    return avp?.value;
   },
 
   setDigestRealm(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Realm'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Realm'], value: Buffer.from(value) });
   },
 
   deleteDigestRealm(packet: RadiusPacket): void {
@@ -61,20 +63,21 @@ export const rfc5090 = {
   },
 
   getAllDigestRealm(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Realm']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Realm']).map(avp => avp.value);
   },
 
   getDigestRealmString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Realm']);
+    const value = this.getDigestRealm(packet);
     return value?.toString('utf8');
   },
 
   getDigestNonce(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Nonce']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Nonce']);
+    return avp?.value;
   },
 
   setDigestNonce(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Nonce'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Nonce'], value: Buffer.from(value) });
   },
 
   deleteDigestNonce(packet: RadiusPacket): void {
@@ -82,20 +85,21 @@ export const rfc5090 = {
   },
 
   getAllDigestNonce(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Nonce']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Nonce']).map(avp => avp.value);
   },
 
   getDigestNonceString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Nonce']);
+    const value = this.getDigestNonce(packet);
     return value?.toString('utf8');
   },
 
   getDigestResponseAuth(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Response_Auth']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Response_Auth']);
+    return avp?.value;
   },
 
   setDigestResponseAuth(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Response_Auth'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Response_Auth'], value: Buffer.from(value) });
   },
 
   deleteDigestResponseAuth(packet: RadiusPacket): void {
@@ -103,20 +107,21 @@ export const rfc5090 = {
   },
 
   getAllDigestResponseAuth(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Response_Auth']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Response_Auth']).map(avp => avp.value);
   },
 
   getDigestResponseAuthString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Response_Auth']);
+    const value = this.getDigestResponseAuth(packet);
     return value?.toString('utf8');
   },
 
   getDigestNextnonce(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Nextnonce']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Nextnonce']);
+    return avp?.value;
   },
 
   setDigestNextnonce(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Nextnonce'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Nextnonce'], value: Buffer.from(value) });
   },
 
   deleteDigestNextnonce(packet: RadiusPacket): void {
@@ -124,20 +129,21 @@ export const rfc5090 = {
   },
 
   getAllDigestNextnonce(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Nextnonce']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Nextnonce']).map(avp => avp.value);
   },
 
   getDigestNextnonceString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Nextnonce']);
+    const value = this.getDigestNextnonce(packet);
     return value?.toString('utf8');
   },
 
   getDigestMethod(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Method']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Method']);
+    return avp?.value;
   },
 
   setDigestMethod(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Method'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Method'], value: Buffer.from(value) });
   },
 
   deleteDigestMethod(packet: RadiusPacket): void {
@@ -145,20 +151,21 @@ export const rfc5090 = {
   },
 
   getAllDigestMethod(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Method']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Method']).map(avp => avp.value);
   },
 
   getDigestMethodString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Method']);
+    const value = this.getDigestMethod(packet);
     return value?.toString('utf8');
   },
 
   getDigestURI(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_URI']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_URI']);
+    return avp?.value;
   },
 
   setDigestURI(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_URI'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_URI'], value: Buffer.from(value) });
   },
 
   deleteDigestURI(packet: RadiusPacket): void {
@@ -166,20 +173,21 @@ export const rfc5090 = {
   },
 
   getAllDigestURI(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_URI']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_URI']).map(avp => avp.value);
   },
 
   getDigestURIString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_URI']);
+    const value = this.getDigestURI(packet);
     return value?.toString('utf8');
   },
 
   getDigestQop(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Qop']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Qop']);
+    return avp?.value;
   },
 
   setDigestQop(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Qop'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Qop'], value: Buffer.from(value) });
   },
 
   deleteDigestQop(packet: RadiusPacket): void {
@@ -187,20 +195,21 @@ export const rfc5090 = {
   },
 
   getAllDigestQop(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Qop']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Qop']).map(avp => avp.value);
   },
 
   getDigestQopString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Qop']);
+    const value = this.getDigestQop(packet);
     return value?.toString('utf8');
   },
 
   getDigestAlgorithm(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Algorithm']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Algorithm']);
+    return avp?.value;
   },
 
   setDigestAlgorithm(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Algorithm'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Algorithm'], value: Buffer.from(value) });
   },
 
   deleteDigestAlgorithm(packet: RadiusPacket): void {
@@ -208,20 +217,21 @@ export const rfc5090 = {
   },
 
   getAllDigestAlgorithm(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Algorithm']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Algorithm']).map(avp => avp.value);
   },
 
   getDigestAlgorithmString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Algorithm']);
+    const value = this.getDigestAlgorithm(packet);
     return value?.toString('utf8');
   },
 
   getDigestEntityBodyHash(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Entity_Body_Hash']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Entity_Body_Hash']);
+    return avp?.value;
   },
 
   setDigestEntityBodyHash(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Entity_Body_Hash'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Entity_Body_Hash'], value: Buffer.from(value) });
   },
 
   deleteDigestEntityBodyHash(packet: RadiusPacket): void {
@@ -229,20 +239,21 @@ export const rfc5090 = {
   },
 
   getAllDigestEntityBodyHash(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Entity_Body_Hash']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Entity_Body_Hash']).map(avp => avp.value);
   },
 
   getDigestEntityBodyHashString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Entity_Body_Hash']);
+    const value = this.getDigestEntityBodyHash(packet);
     return value?.toString('utf8');
   },
 
   getDigestCNonce(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_CNonce']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_CNonce']);
+    return avp?.value;
   },
 
   setDigestCNonce(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_CNonce'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_CNonce'], value: Buffer.from(value) });
   },
 
   deleteDigestCNonce(packet: RadiusPacket): void {
@@ -250,20 +261,21 @@ export const rfc5090 = {
   },
 
   getAllDigestCNonce(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_CNonce']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_CNonce']).map(avp => avp.value);
   },
 
   getDigestCNonceString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_CNonce']);
+    const value = this.getDigestCNonce(packet);
     return value?.toString('utf8');
   },
 
   getDigestNonceCount(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Nonce_Count']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Nonce_Count']);
+    return avp?.value;
   },
 
   setDigestNonceCount(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Nonce_Count'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Nonce_Count'], value: Buffer.from(value) });
   },
 
   deleteDigestNonceCount(packet: RadiusPacket): void {
@@ -271,20 +283,21 @@ export const rfc5090 = {
   },
 
   getAllDigestNonceCount(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Nonce_Count']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Nonce_Count']).map(avp => avp.value);
   },
 
   getDigestNonceCountString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Nonce_Count']);
+    const value = this.getDigestNonceCount(packet);
     return value?.toString('utf8');
   },
 
   getDigestUsername(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Username']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Username']);
+    return avp?.value;
   },
 
   setDigestUsername(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Username'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Username'], value: Buffer.from(value) });
   },
 
   deleteDigestUsername(packet: RadiusPacket): void {
@@ -292,20 +305,21 @@ export const rfc5090 = {
   },
 
   getAllDigestUsername(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Username']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Username']).map(avp => avp.value);
   },
 
   getDigestUsernameString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Username']);
+    const value = this.getDigestUsername(packet);
     return value?.toString('utf8');
   },
 
   getDigestOpaque(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Opaque']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Opaque']);
+    return avp?.value;
   },
 
   setDigestOpaque(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Opaque'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Opaque'], value: Buffer.from(value) });
   },
 
   deleteDigestOpaque(packet: RadiusPacket): void {
@@ -313,20 +327,21 @@ export const rfc5090 = {
   },
 
   getAllDigestOpaque(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Opaque']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Opaque']).map(avp => avp.value);
   },
 
   getDigestOpaqueString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Opaque']);
+    const value = this.getDigestOpaque(packet);
     return value?.toString('utf8');
   },
 
   getDigestAuthParam(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Auth_Param']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Auth_Param']);
+    return avp?.value;
   },
 
   setDigestAuthParam(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Auth_Param'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Auth_Param'], value: Buffer.from(value) });
   },
 
   deleteDigestAuthParam(packet: RadiusPacket): void {
@@ -334,20 +349,21 @@ export const rfc5090 = {
   },
 
   getAllDigestAuthParam(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Auth_Param']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Auth_Param']).map(avp => avp.value);
   },
 
   getDigestAuthParamString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Auth_Param']);
+    const value = this.getDigestAuthParam(packet);
     return value?.toString('utf8');
   },
 
   getDigestAKAAuts(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_AKA_Auts']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_AKA_Auts']);
+    return avp?.value;
   },
 
   setDigestAKAAuts(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_AKA_Auts'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_AKA_Auts'], value: Buffer.from(value) });
   },
 
   deleteDigestAKAAuts(packet: RadiusPacket): void {
@@ -355,20 +371,21 @@ export const rfc5090 = {
   },
 
   getAllDigestAKAAuts(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_AKA_Auts']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_AKA_Auts']).map(avp => avp.value);
   },
 
   getDigestAKAAutsString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_AKA_Auts']);
+    const value = this.getDigestAKAAuts(packet);
     return value?.toString('utf8');
   },
 
   getDigestDomain(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Domain']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Domain']);
+    return avp?.value;
   },
 
   setDigestDomain(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Domain'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Domain'], value: Buffer.from(value) });
   },
 
   deleteDigestDomain(packet: RadiusPacket): void {
@@ -376,20 +393,21 @@ export const rfc5090 = {
   },
 
   getAllDigestDomain(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Domain']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Domain']).map(avp => avp.value);
   },
 
   getDigestDomainString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Domain']);
+    const value = this.getDigestDomain(packet);
     return value?.toString('utf8');
   },
 
   getDigestStale(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_Stale']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_Stale']);
+    return avp?.value;
   },
 
   setDigestStale(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_Stale'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_Stale'], value: Buffer.from(value) });
   },
 
   deleteDigestStale(packet: RadiusPacket): void {
@@ -397,20 +415,21 @@ export const rfc5090 = {
   },
 
   getAllDigestStale(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Stale']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_Stale']).map(avp => avp.value);
   },
 
   getDigestStaleString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_Stale']);
+    const value = this.getDigestStale(packet);
     return value?.toString('utf8');
   },
 
   getDigestHA1(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['Digest_HA1']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['Digest_HA1']);
+    return avp?.value;
   },
 
   setDigestHA1(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['Digest_HA1'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['Digest_HA1'], value: Buffer.from(value) });
   },
 
   deleteDigestHA1(packet: RadiusPacket): void {
@@ -418,20 +437,21 @@ export const rfc5090 = {
   },
 
   getAllDigestHA1(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_HA1']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['Digest_HA1']).map(avp => avp.value);
   },
 
   getDigestHA1String(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['Digest_HA1']);
+    const value = this.getDigestHA1(packet);
     return value?.toString('utf8');
   },
 
   getSIPAOR(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5090AttributeTypes['SIP_AOR']);
+    const avp = packet.getAttribute(rfc5090AttributeTypes['SIP_AOR']);
+    return avp?.value;
   },
 
   setSIPAOR(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5090AttributeTypes['SIP_AOR'], value);
+    packet.addAttribute({ type: rfc5090AttributeTypes['SIP_AOR'], value: Buffer.from(value) });
   },
 
   deleteSIPAOR(packet: RadiusPacket): void {
@@ -439,11 +459,11 @@ export const rfc5090 = {
   },
 
   getAllSIPAOR(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5090AttributeTypes['SIP_AOR']);
+    return packet.getAllAttributes(rfc5090AttributeTypes['SIP_AOR']).map(avp => avp.value);
   },
 
   getSIPAORString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5090AttributeTypes['SIP_AOR']);
+    const value = this.getSIPAOR(packet);
     return value?.toString('utf8');
   },
 

@@ -1,4 +1,5 @@
 // generator/generate.ts
+
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -27,7 +28,7 @@ function generateAttributes(dictionaryFile: string) {
 
   const rfcName = dictionaryFile.replace('dictionary.', '');
   let code = `// Generated from ${dictionaryFile}\n`;
-  code += `import { RadiusPacket } from "../packet.js";\n\n`;
+  code += `import { RadiusPacket } from "../radius-packet.js";\n\n`;
   
   // アトリビュート型の定義（ハイフンをアンダースコアに変換し、キーをシングルクォートで囲う）
   code += `export const ${rfcName}AttributeTypes = {\n`;
@@ -44,19 +45,20 @@ function generateAttributes(dictionaryFile: string) {
     const methodName = attr.name.replace(/-/g, '');
     const attrKey = `${rfcName}AttributeTypes['${attr.name.replace(/-/g, '_')}']`;
     code += `  get${methodName}(packet: RadiusPacket): Buffer | undefined {\n`;
-    code += `    return packet.getAttribute(${attrKey});\n`;
+    code += `    const avp = packet.getAttribute(${attrKey});\n`;
+    code += `    return avp?.value;\n`;
     code += `  },\n\n`;
     code += `  set${methodName}(packet: RadiusPacket, value: string | Buffer): void {\n`;
-    code += `    packet.addAttribute(${attrKey}, value);\n`;
+    code += `    packet.addAttribute({ type: ${attrKey}, value: Buffer.from(value) });\n`;
     code += `  },\n\n`;
     code += `  delete${methodName}(packet: RadiusPacket): void {\n`;
     code += `    packet.deleteAttribute(${attrKey});\n`;
     code += `  },\n\n`;
     code += `  getAll${methodName}(packet: RadiusPacket): Buffer[] {\n`;
-    code += `    return packet.getAllAttributes(${attrKey});\n`;
+    code += `    return packet.getAllAttributes(${attrKey}).map(avp => avp.value);\n`;
     code += `  },\n\n`;
     code += `  get${methodName}String(packet: RadiusPacket): string | undefined {\n`;
-    code += `    const value = packet.getAttribute(${attrKey});\n`;
+    code += `    const value = this.get${methodName}(packet);\n`;
     code += `    return value?.toString('utf8');\n`;
     code += `  },\n\n`;
   });

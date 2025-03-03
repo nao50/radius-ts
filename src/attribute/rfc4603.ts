@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4603
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc4603AttributeTypes = {
 } as const;

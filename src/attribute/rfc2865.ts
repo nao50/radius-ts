@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc2865
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc2865AttributeTypes = {
   'User_Name': 1,
@@ -49,11 +49,12 @@ export type rfc2865AttributeType = typeof rfc2865AttributeTypes[keyof typeof rfc
 
 export const rfc2865 = {
   getUserName(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['User_Name']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['User_Name']);
+    return avp?.value;
   },
 
   setUserName(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['User_Name'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['User_Name'], value: Buffer.from(value) });
   },
 
   deleteUserName(packet: RadiusPacket): void {
@@ -61,20 +62,21 @@ export const rfc2865 = {
   },
 
   getAllUserName(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['User_Name']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['User_Name']).map(avp => avp.value);
   },
 
   getUserNameString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['User_Name']);
+    const value = this.getUserName(packet);
     return value?.toString('utf8');
   },
 
   getUserPassword(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['User_Password']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['User_Password']);
+    return avp?.value;
   },
 
   setUserPassword(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['User_Password'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['User_Password'], value: Buffer.from(value) });
   },
 
   deleteUserPassword(packet: RadiusPacket): void {
@@ -82,20 +84,21 @@ export const rfc2865 = {
   },
 
   getAllUserPassword(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['User_Password']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['User_Password']).map(avp => avp.value);
   },
 
   getUserPasswordString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['User_Password']);
+    const value = this.getUserPassword(packet);
     return value?.toString('utf8');
   },
 
   getCHAPPassword(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['CHAP_Password']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['CHAP_Password']);
+    return avp?.value;
   },
 
   setCHAPPassword(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['CHAP_Password'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['CHAP_Password'], value: Buffer.from(value) });
   },
 
   deleteCHAPPassword(packet: RadiusPacket): void {
@@ -103,20 +106,21 @@ export const rfc2865 = {
   },
 
   getAllCHAPPassword(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['CHAP_Password']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['CHAP_Password']).map(avp => avp.value);
   },
 
   getCHAPPasswordString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['CHAP_Password']);
+    const value = this.getCHAPPassword(packet);
     return value?.toString('utf8');
   },
 
   getNASIPAddress(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['NAS_IP_Address']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['NAS_IP_Address']);
+    return avp?.value;
   },
 
   setNASIPAddress(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['NAS_IP_Address'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['NAS_IP_Address'], value: Buffer.from(value) });
   },
 
   deleteNASIPAddress(packet: RadiusPacket): void {
@@ -124,20 +128,21 @@ export const rfc2865 = {
   },
 
   getAllNASIPAddress(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_IP_Address']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_IP_Address']).map(avp => avp.value);
   },
 
   getNASIPAddressString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['NAS_IP_Address']);
+    const value = this.getNASIPAddress(packet);
     return value?.toString('utf8');
   },
 
   getNASPort(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['NAS_Port']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['NAS_Port']);
+    return avp?.value;
   },
 
   setNASPort(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['NAS_Port'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['NAS_Port'], value: Buffer.from(value) });
   },
 
   deleteNASPort(packet: RadiusPacket): void {
@@ -145,20 +150,21 @@ export const rfc2865 = {
   },
 
   getAllNASPort(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_Port']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_Port']).map(avp => avp.value);
   },
 
   getNASPortString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['NAS_Port']);
+    const value = this.getNASPort(packet);
     return value?.toString('utf8');
   },
 
   getServiceType(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Service_Type']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Service_Type']);
+    return avp?.value;
   },
 
   setServiceType(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Service_Type'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Service_Type'], value: Buffer.from(value) });
   },
 
   deleteServiceType(packet: RadiusPacket): void {
@@ -166,20 +172,21 @@ export const rfc2865 = {
   },
 
   getAllServiceType(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Service_Type']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Service_Type']).map(avp => avp.value);
   },
 
   getServiceTypeString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Service_Type']);
+    const value = this.getServiceType(packet);
     return value?.toString('utf8');
   },
 
   getFramedProtocol(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_Protocol']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_Protocol']);
+    return avp?.value;
   },
 
   setFramedProtocol(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_Protocol'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_Protocol'], value: Buffer.from(value) });
   },
 
   deleteFramedProtocol(packet: RadiusPacket): void {
@@ -187,20 +194,21 @@ export const rfc2865 = {
   },
 
   getAllFramedProtocol(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Protocol']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Protocol']).map(avp => avp.value);
   },
 
   getFramedProtocolString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_Protocol']);
+    const value = this.getFramedProtocol(packet);
     return value?.toString('utf8');
   },
 
   getFramedIPAddress(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_IP_Address']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_IP_Address']);
+    return avp?.value;
   },
 
   setFramedIPAddress(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_IP_Address'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_IP_Address'], value: Buffer.from(value) });
   },
 
   deleteFramedIPAddress(packet: RadiusPacket): void {
@@ -208,20 +216,21 @@ export const rfc2865 = {
   },
 
   getAllFramedIPAddress(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_IP_Address']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_IP_Address']).map(avp => avp.value);
   },
 
   getFramedIPAddressString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_IP_Address']);
+    const value = this.getFramedIPAddress(packet);
     return value?.toString('utf8');
   },
 
   getFramedIPNetmask(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_IP_Netmask']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_IP_Netmask']);
+    return avp?.value;
   },
 
   setFramedIPNetmask(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_IP_Netmask'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_IP_Netmask'], value: Buffer.from(value) });
   },
 
   deleteFramedIPNetmask(packet: RadiusPacket): void {
@@ -229,20 +238,21 @@ export const rfc2865 = {
   },
 
   getAllFramedIPNetmask(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_IP_Netmask']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_IP_Netmask']).map(avp => avp.value);
   },
 
   getFramedIPNetmaskString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_IP_Netmask']);
+    const value = this.getFramedIPNetmask(packet);
     return value?.toString('utf8');
   },
 
   getFramedRouting(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_Routing']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_Routing']);
+    return avp?.value;
   },
 
   setFramedRouting(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_Routing'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_Routing'], value: Buffer.from(value) });
   },
 
   deleteFramedRouting(packet: RadiusPacket): void {
@@ -250,20 +260,21 @@ export const rfc2865 = {
   },
 
   getAllFramedRouting(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Routing']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Routing']).map(avp => avp.value);
   },
 
   getFramedRoutingString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_Routing']);
+    const value = this.getFramedRouting(packet);
     return value?.toString('utf8');
   },
 
   getFilterId(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Filter_Id']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Filter_Id']);
+    return avp?.value;
   },
 
   setFilterId(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Filter_Id'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Filter_Id'], value: Buffer.from(value) });
   },
 
   deleteFilterId(packet: RadiusPacket): void {
@@ -271,20 +282,21 @@ export const rfc2865 = {
   },
 
   getAllFilterId(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Filter_Id']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Filter_Id']).map(avp => avp.value);
   },
 
   getFilterIdString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Filter_Id']);
+    const value = this.getFilterId(packet);
     return value?.toString('utf8');
   },
 
   getFramedMTU(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_MTU']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_MTU']);
+    return avp?.value;
   },
 
   setFramedMTU(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_MTU'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_MTU'], value: Buffer.from(value) });
   },
 
   deleteFramedMTU(packet: RadiusPacket): void {
@@ -292,20 +304,21 @@ export const rfc2865 = {
   },
 
   getAllFramedMTU(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_MTU']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_MTU']).map(avp => avp.value);
   },
 
   getFramedMTUString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_MTU']);
+    const value = this.getFramedMTU(packet);
     return value?.toString('utf8');
   },
 
   getFramedCompression(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_Compression']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_Compression']);
+    return avp?.value;
   },
 
   setFramedCompression(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_Compression'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_Compression'], value: Buffer.from(value) });
   },
 
   deleteFramedCompression(packet: RadiusPacket): void {
@@ -313,20 +326,21 @@ export const rfc2865 = {
   },
 
   getAllFramedCompression(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Compression']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Compression']).map(avp => avp.value);
   },
 
   getFramedCompressionString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_Compression']);
+    const value = this.getFramedCompression(packet);
     return value?.toString('utf8');
   },
 
   getLoginIPHost(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Login_IP_Host']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Login_IP_Host']);
+    return avp?.value;
   },
 
   setLoginIPHost(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Login_IP_Host'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Login_IP_Host'], value: Buffer.from(value) });
   },
 
   deleteLoginIPHost(packet: RadiusPacket): void {
@@ -334,20 +348,21 @@ export const rfc2865 = {
   },
 
   getAllLoginIPHost(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Login_IP_Host']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Login_IP_Host']).map(avp => avp.value);
   },
 
   getLoginIPHostString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Login_IP_Host']);
+    const value = this.getLoginIPHost(packet);
     return value?.toString('utf8');
   },
 
   getLoginService(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Login_Service']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Login_Service']);
+    return avp?.value;
   },
 
   setLoginService(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Login_Service'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Login_Service'], value: Buffer.from(value) });
   },
 
   deleteLoginService(packet: RadiusPacket): void {
@@ -355,20 +370,21 @@ export const rfc2865 = {
   },
 
   getAllLoginService(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Login_Service']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Login_Service']).map(avp => avp.value);
   },
 
   getLoginServiceString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Login_Service']);
+    const value = this.getLoginService(packet);
     return value?.toString('utf8');
   },
 
   getLoginTCPPort(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Login_TCP_Port']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Login_TCP_Port']);
+    return avp?.value;
   },
 
   setLoginTCPPort(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Login_TCP_Port'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Login_TCP_Port'], value: Buffer.from(value) });
   },
 
   deleteLoginTCPPort(packet: RadiusPacket): void {
@@ -376,20 +392,21 @@ export const rfc2865 = {
   },
 
   getAllLoginTCPPort(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Login_TCP_Port']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Login_TCP_Port']).map(avp => avp.value);
   },
 
   getLoginTCPPortString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Login_TCP_Port']);
+    const value = this.getLoginTCPPort(packet);
     return value?.toString('utf8');
   },
 
   getReplyMessage(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Reply_Message']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Reply_Message']);
+    return avp?.value;
   },
 
   setReplyMessage(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Reply_Message'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Reply_Message'], value: Buffer.from(value) });
   },
 
   deleteReplyMessage(packet: RadiusPacket): void {
@@ -397,20 +414,21 @@ export const rfc2865 = {
   },
 
   getAllReplyMessage(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Reply_Message']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Reply_Message']).map(avp => avp.value);
   },
 
   getReplyMessageString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Reply_Message']);
+    const value = this.getReplyMessage(packet);
     return value?.toString('utf8');
   },
 
   getCallbackNumber(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Callback_Number']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Callback_Number']);
+    return avp?.value;
   },
 
   setCallbackNumber(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Callback_Number'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Callback_Number'], value: Buffer.from(value) });
   },
 
   deleteCallbackNumber(packet: RadiusPacket): void {
@@ -418,20 +436,21 @@ export const rfc2865 = {
   },
 
   getAllCallbackNumber(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Callback_Number']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Callback_Number']).map(avp => avp.value);
   },
 
   getCallbackNumberString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Callback_Number']);
+    const value = this.getCallbackNumber(packet);
     return value?.toString('utf8');
   },
 
   getCallbackId(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Callback_Id']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Callback_Id']);
+    return avp?.value;
   },
 
   setCallbackId(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Callback_Id'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Callback_Id'], value: Buffer.from(value) });
   },
 
   deleteCallbackId(packet: RadiusPacket): void {
@@ -439,20 +458,21 @@ export const rfc2865 = {
   },
 
   getAllCallbackId(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Callback_Id']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Callback_Id']).map(avp => avp.value);
   },
 
   getCallbackIdString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Callback_Id']);
+    const value = this.getCallbackId(packet);
     return value?.toString('utf8');
   },
 
   getFramedRoute(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_Route']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_Route']);
+    return avp?.value;
   },
 
   setFramedRoute(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_Route'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_Route'], value: Buffer.from(value) });
   },
 
   deleteFramedRoute(packet: RadiusPacket): void {
@@ -460,20 +480,21 @@ export const rfc2865 = {
   },
 
   getAllFramedRoute(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Route']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_Route']).map(avp => avp.value);
   },
 
   getFramedRouteString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_Route']);
+    const value = this.getFramedRoute(packet);
     return value?.toString('utf8');
   },
 
   getFramedIPXNetwork(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_IPX_Network']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_IPX_Network']);
+    return avp?.value;
   },
 
   setFramedIPXNetwork(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_IPX_Network'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_IPX_Network'], value: Buffer.from(value) });
   },
 
   deleteFramedIPXNetwork(packet: RadiusPacket): void {
@@ -481,20 +502,21 @@ export const rfc2865 = {
   },
 
   getAllFramedIPXNetwork(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_IPX_Network']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_IPX_Network']).map(avp => avp.value);
   },
 
   getFramedIPXNetworkString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_IPX_Network']);
+    const value = this.getFramedIPXNetwork(packet);
     return value?.toString('utf8');
   },
 
   getState(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['State']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['State']);
+    return avp?.value;
   },
 
   setState(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['State'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['State'], value: Buffer.from(value) });
   },
 
   deleteState(packet: RadiusPacket): void {
@@ -502,20 +524,21 @@ export const rfc2865 = {
   },
 
   getAllState(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['State']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['State']).map(avp => avp.value);
   },
 
   getStateString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['State']);
+    const value = this.getState(packet);
     return value?.toString('utf8');
   },
 
   getClass(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Class']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Class']);
+    return avp?.value;
   },
 
   setClass(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Class'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Class'], value: Buffer.from(value) });
   },
 
   deleteClass(packet: RadiusPacket): void {
@@ -523,20 +546,21 @@ export const rfc2865 = {
   },
 
   getAllClass(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Class']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Class']).map(avp => avp.value);
   },
 
   getClassString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Class']);
+    const value = this.getClass(packet);
     return value?.toString('utf8');
   },
 
   getVendorSpecific(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Vendor_Specific']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Vendor_Specific']);
+    return avp?.value;
   },
 
   setVendorSpecific(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Vendor_Specific'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Vendor_Specific'], value: Buffer.from(value) });
   },
 
   deleteVendorSpecific(packet: RadiusPacket): void {
@@ -544,20 +568,21 @@ export const rfc2865 = {
   },
 
   getAllVendorSpecific(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Vendor_Specific']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Vendor_Specific']).map(avp => avp.value);
   },
 
   getVendorSpecificString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Vendor_Specific']);
+    const value = this.getVendorSpecific(packet);
     return value?.toString('utf8');
   },
 
   getSessionTimeout(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Session_Timeout']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Session_Timeout']);
+    return avp?.value;
   },
 
   setSessionTimeout(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Session_Timeout'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Session_Timeout'], value: Buffer.from(value) });
   },
 
   deleteSessionTimeout(packet: RadiusPacket): void {
@@ -565,20 +590,21 @@ export const rfc2865 = {
   },
 
   getAllSessionTimeout(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Session_Timeout']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Session_Timeout']).map(avp => avp.value);
   },
 
   getSessionTimeoutString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Session_Timeout']);
+    const value = this.getSessionTimeout(packet);
     return value?.toString('utf8');
   },
 
   getIdleTimeout(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Idle_Timeout']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Idle_Timeout']);
+    return avp?.value;
   },
 
   setIdleTimeout(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Idle_Timeout'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Idle_Timeout'], value: Buffer.from(value) });
   },
 
   deleteIdleTimeout(packet: RadiusPacket): void {
@@ -586,20 +612,21 @@ export const rfc2865 = {
   },
 
   getAllIdleTimeout(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Idle_Timeout']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Idle_Timeout']).map(avp => avp.value);
   },
 
   getIdleTimeoutString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Idle_Timeout']);
+    const value = this.getIdleTimeout(packet);
     return value?.toString('utf8');
   },
 
   getTerminationAction(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Termination_Action']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Termination_Action']);
+    return avp?.value;
   },
 
   setTerminationAction(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Termination_Action'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Termination_Action'], value: Buffer.from(value) });
   },
 
   deleteTerminationAction(packet: RadiusPacket): void {
@@ -607,20 +634,21 @@ export const rfc2865 = {
   },
 
   getAllTerminationAction(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Termination_Action']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Termination_Action']).map(avp => avp.value);
   },
 
   getTerminationActionString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Termination_Action']);
+    const value = this.getTerminationAction(packet);
     return value?.toString('utf8');
   },
 
   getCalledStationId(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Called_Station_Id']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Called_Station_Id']);
+    return avp?.value;
   },
 
   setCalledStationId(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Called_Station_Id'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Called_Station_Id'], value: Buffer.from(value) });
   },
 
   deleteCalledStationId(packet: RadiusPacket): void {
@@ -628,20 +656,21 @@ export const rfc2865 = {
   },
 
   getAllCalledStationId(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Called_Station_Id']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Called_Station_Id']).map(avp => avp.value);
   },
 
   getCalledStationIdString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Called_Station_Id']);
+    const value = this.getCalledStationId(packet);
     return value?.toString('utf8');
   },
 
   getCallingStationId(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Calling_Station_Id']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Calling_Station_Id']);
+    return avp?.value;
   },
 
   setCallingStationId(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Calling_Station_Id'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Calling_Station_Id'], value: Buffer.from(value) });
   },
 
   deleteCallingStationId(packet: RadiusPacket): void {
@@ -649,20 +678,21 @@ export const rfc2865 = {
   },
 
   getAllCallingStationId(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Calling_Station_Id']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Calling_Station_Id']).map(avp => avp.value);
   },
 
   getCallingStationIdString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Calling_Station_Id']);
+    const value = this.getCallingStationId(packet);
     return value?.toString('utf8');
   },
 
   getNASIdentifier(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['NAS_Identifier']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['NAS_Identifier']);
+    return avp?.value;
   },
 
   setNASIdentifier(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['NAS_Identifier'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['NAS_Identifier'], value: Buffer.from(value) });
   },
 
   deleteNASIdentifier(packet: RadiusPacket): void {
@@ -670,20 +700,21 @@ export const rfc2865 = {
   },
 
   getAllNASIdentifier(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_Identifier']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_Identifier']).map(avp => avp.value);
   },
 
   getNASIdentifierString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['NAS_Identifier']);
+    const value = this.getNASIdentifier(packet);
     return value?.toString('utf8');
   },
 
   getProxyState(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Proxy_State']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Proxy_State']);
+    return avp?.value;
   },
 
   setProxyState(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Proxy_State'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Proxy_State'], value: Buffer.from(value) });
   },
 
   deleteProxyState(packet: RadiusPacket): void {
@@ -691,20 +722,21 @@ export const rfc2865 = {
   },
 
   getAllProxyState(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Proxy_State']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Proxy_State']).map(avp => avp.value);
   },
 
   getProxyStateString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Proxy_State']);
+    const value = this.getProxyState(packet);
     return value?.toString('utf8');
   },
 
   getLoginLATService(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Service']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Service']);
+    return avp?.value;
   },
 
   setLoginLATService(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Login_LAT_Service'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Login_LAT_Service'], value: Buffer.from(value) });
   },
 
   deleteLoginLATService(packet: RadiusPacket): void {
@@ -712,20 +744,21 @@ export const rfc2865 = {
   },
 
   getAllLoginLATService(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Service']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Service']).map(avp => avp.value);
   },
 
   getLoginLATServiceString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Service']);
+    const value = this.getLoginLATService(packet);
     return value?.toString('utf8');
   },
 
   getLoginLATNode(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Node']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Node']);
+    return avp?.value;
   },
 
   setLoginLATNode(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Login_LAT_Node'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Login_LAT_Node'], value: Buffer.from(value) });
   },
 
   deleteLoginLATNode(packet: RadiusPacket): void {
@@ -733,20 +766,21 @@ export const rfc2865 = {
   },
 
   getAllLoginLATNode(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Node']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Node']).map(avp => avp.value);
   },
 
   getLoginLATNodeString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Node']);
+    const value = this.getLoginLATNode(packet);
     return value?.toString('utf8');
   },
 
   getLoginLATGroup(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Group']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Group']);
+    return avp?.value;
   },
 
   setLoginLATGroup(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Login_LAT_Group'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Login_LAT_Group'], value: Buffer.from(value) });
   },
 
   deleteLoginLATGroup(packet: RadiusPacket): void {
@@ -754,20 +788,21 @@ export const rfc2865 = {
   },
 
   getAllLoginLATGroup(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Group']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Group']).map(avp => avp.value);
   },
 
   getLoginLATGroupString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Group']);
+    const value = this.getLoginLATGroup(packet);
     return value?.toString('utf8');
   },
 
   getFramedAppleTalkLink(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Link']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Link']);
+    return avp?.value;
   },
 
   setFramedAppleTalkLink(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Link'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_AppleTalk_Link'], value: Buffer.from(value) });
   },
 
   deleteFramedAppleTalkLink(packet: RadiusPacket): void {
@@ -775,20 +810,21 @@ export const rfc2865 = {
   },
 
   getAllFramedAppleTalkLink(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_AppleTalk_Link']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_AppleTalk_Link']).map(avp => avp.value);
   },
 
   getFramedAppleTalkLinkString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Link']);
+    const value = this.getFramedAppleTalkLink(packet);
     return value?.toString('utf8');
   },
 
   getFramedAppleTalkNetwork(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Network']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Network']);
+    return avp?.value;
   },
 
   setFramedAppleTalkNetwork(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Network'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_AppleTalk_Network'], value: Buffer.from(value) });
   },
 
   deleteFramedAppleTalkNetwork(packet: RadiusPacket): void {
@@ -796,20 +832,21 @@ export const rfc2865 = {
   },
 
   getAllFramedAppleTalkNetwork(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_AppleTalk_Network']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_AppleTalk_Network']).map(avp => avp.value);
   },
 
   getFramedAppleTalkNetworkString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Network']);
+    const value = this.getFramedAppleTalkNetwork(packet);
     return value?.toString('utf8');
   },
 
   getFramedAppleTalkZone(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Zone']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Zone']);
+    return avp?.value;
   },
 
   setFramedAppleTalkZone(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Zone'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Framed_AppleTalk_Zone'], value: Buffer.from(value) });
   },
 
   deleteFramedAppleTalkZone(packet: RadiusPacket): void {
@@ -817,20 +854,21 @@ export const rfc2865 = {
   },
 
   getAllFramedAppleTalkZone(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_AppleTalk_Zone']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Framed_AppleTalk_Zone']).map(avp => avp.value);
   },
 
   getFramedAppleTalkZoneString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Framed_AppleTalk_Zone']);
+    const value = this.getFramedAppleTalkZone(packet);
     return value?.toString('utf8');
   },
 
   getCHAPChallenge(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['CHAP_Challenge']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['CHAP_Challenge']);
+    return avp?.value;
   },
 
   setCHAPChallenge(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['CHAP_Challenge'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['CHAP_Challenge'], value: Buffer.from(value) });
   },
 
   deleteCHAPChallenge(packet: RadiusPacket): void {
@@ -838,20 +876,21 @@ export const rfc2865 = {
   },
 
   getAllCHAPChallenge(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['CHAP_Challenge']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['CHAP_Challenge']).map(avp => avp.value);
   },
 
   getCHAPChallengeString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['CHAP_Challenge']);
+    const value = this.getCHAPChallenge(packet);
     return value?.toString('utf8');
   },
 
   getNASPortType(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['NAS_Port_Type']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['NAS_Port_Type']);
+    return avp?.value;
   },
 
   setNASPortType(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['NAS_Port_Type'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['NAS_Port_Type'], value: Buffer.from(value) });
   },
 
   deleteNASPortType(packet: RadiusPacket): void {
@@ -859,20 +898,21 @@ export const rfc2865 = {
   },
 
   getAllNASPortType(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_Port_Type']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['NAS_Port_Type']).map(avp => avp.value);
   },
 
   getNASPortTypeString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['NAS_Port_Type']);
+    const value = this.getNASPortType(packet);
     return value?.toString('utf8');
   },
 
   getPortLimit(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Port_Limit']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Port_Limit']);
+    return avp?.value;
   },
 
   setPortLimit(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Port_Limit'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Port_Limit'], value: Buffer.from(value) });
   },
 
   deletePortLimit(packet: RadiusPacket): void {
@@ -880,20 +920,21 @@ export const rfc2865 = {
   },
 
   getAllPortLimit(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Port_Limit']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Port_Limit']).map(avp => avp.value);
   },
 
   getPortLimitString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Port_Limit']);
+    const value = this.getPortLimit(packet);
     return value?.toString('utf8');
   },
 
   getLoginLATPort(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Port']);
+    const avp = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Port']);
+    return avp?.value;
   },
 
   setLoginLATPort(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc2865AttributeTypes['Login_LAT_Port'], value);
+    packet.addAttribute({ type: rfc2865AttributeTypes['Login_LAT_Port'], value: Buffer.from(value) });
   },
 
   deleteLoginLATPort(packet: RadiusPacket): void {
@@ -901,11 +942,11 @@ export const rfc2865 = {
   },
 
   getAllLoginLATPort(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Port']);
+    return packet.getAllAttributes(rfc2865AttributeTypes['Login_LAT_Port']).map(avp => avp.value);
   },
 
   getLoginLATPortString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc2865AttributeTypes['Login_LAT_Port']);
+    const value = this.getLoginLATPort(packet);
     return value?.toString('utf8');
   },
 

@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc6677
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc6677AttributeTypes = {
   'EAP_Lower_Layer': 163,
@@ -9,11 +9,12 @@ export type rfc6677AttributeType = typeof rfc6677AttributeTypes[keyof typeof rfc
 
 export const rfc6677 = {
   getEAPLowerLayer(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc6677AttributeTypes['EAP_Lower_Layer']);
+    const avp = packet.getAttribute(rfc6677AttributeTypes['EAP_Lower_Layer']);
+    return avp?.value;
   },
 
   setEAPLowerLayer(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc6677AttributeTypes['EAP_Lower_Layer'], value);
+    packet.addAttribute({ type: rfc6677AttributeTypes['EAP_Lower_Layer'], value: Buffer.from(value) });
   },
 
   deleteEAPLowerLayer(packet: RadiusPacket): void {
@@ -21,11 +22,11 @@ export const rfc6677 = {
   },
 
   getAllEAPLowerLayer(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc6677AttributeTypes['EAP_Lower_Layer']);
+    return packet.getAllAttributes(rfc6677AttributeTypes['EAP_Lower_Layer']).map(avp => avp.value);
   },
 
   getEAPLowerLayerString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc6677AttributeTypes['EAP_Lower_Layer']);
+    const value = this.getEAPLowerLayer(packet);
     return value?.toString('utf8');
   },
 

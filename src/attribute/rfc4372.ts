@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4372
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc4372AttributeTypes = {
   'Chargeable_User_Identity': 89,
@@ -9,11 +9,12 @@ export type rfc4372AttributeType = typeof rfc4372AttributeTypes[keyof typeof rfc
 
 export const rfc4372 = {
   getChargeableUserIdentity(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc4372AttributeTypes['Chargeable_User_Identity']);
+    const avp = packet.getAttribute(rfc4372AttributeTypes['Chargeable_User_Identity']);
+    return avp?.value;
   },
 
   setChargeableUserIdentity(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc4372AttributeTypes['Chargeable_User_Identity'], value);
+    packet.addAttribute({ type: rfc4372AttributeTypes['Chargeable_User_Identity'], value: Buffer.from(value) });
   },
 
   deleteChargeableUserIdentity(packet: RadiusPacket): void {
@@ -21,11 +22,11 @@ export const rfc4372 = {
   },
 
   getAllChargeableUserIdentity(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc4372AttributeTypes['Chargeable_User_Identity']);
+    return packet.getAllAttributes(rfc4372AttributeTypes['Chargeable_User_Identity']).map(avp => avp.value);
   },
 
   getChargeableUserIdentityString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc4372AttributeTypes['Chargeable_User_Identity']);
+    const value = this.getChargeableUserIdentity(packet);
     return value?.toString('utf8');
   },
 

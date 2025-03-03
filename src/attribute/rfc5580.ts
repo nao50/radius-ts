@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5580
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc5580AttributeTypes = {
   'Operator_Name': 126,
@@ -15,11 +15,12 @@ export type rfc5580AttributeType = typeof rfc5580AttributeTypes[keyof typeof rfc
 
 export const rfc5580 = {
   getOperatorName(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5580AttributeTypes['Operator_Name']);
+    const avp = packet.getAttribute(rfc5580AttributeTypes['Operator_Name']);
+    return avp?.value;
   },
 
   setOperatorName(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5580AttributeTypes['Operator_Name'], value);
+    packet.addAttribute({ type: rfc5580AttributeTypes['Operator_Name'], value: Buffer.from(value) });
   },
 
   deleteOperatorName(packet: RadiusPacket): void {
@@ -27,20 +28,21 @@ export const rfc5580 = {
   },
 
   getAllOperatorName(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5580AttributeTypes['Operator_Name']);
+    return packet.getAllAttributes(rfc5580AttributeTypes['Operator_Name']).map(avp => avp.value);
   },
 
   getOperatorNameString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5580AttributeTypes['Operator_Name']);
+    const value = this.getOperatorName(packet);
     return value?.toString('utf8');
   },
 
   getLocationInformation(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5580AttributeTypes['Location_Information']);
+    const avp = packet.getAttribute(rfc5580AttributeTypes['Location_Information']);
+    return avp?.value;
   },
 
   setLocationInformation(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5580AttributeTypes['Location_Information'], value);
+    packet.addAttribute({ type: rfc5580AttributeTypes['Location_Information'], value: Buffer.from(value) });
   },
 
   deleteLocationInformation(packet: RadiusPacket): void {
@@ -48,20 +50,21 @@ export const rfc5580 = {
   },
 
   getAllLocationInformation(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5580AttributeTypes['Location_Information']);
+    return packet.getAllAttributes(rfc5580AttributeTypes['Location_Information']).map(avp => avp.value);
   },
 
   getLocationInformationString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5580AttributeTypes['Location_Information']);
+    const value = this.getLocationInformation(packet);
     return value?.toString('utf8');
   },
 
   getLocationData(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5580AttributeTypes['Location_Data']);
+    const avp = packet.getAttribute(rfc5580AttributeTypes['Location_Data']);
+    return avp?.value;
   },
 
   setLocationData(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5580AttributeTypes['Location_Data'], value);
+    packet.addAttribute({ type: rfc5580AttributeTypes['Location_Data'], value: Buffer.from(value) });
   },
 
   deleteLocationData(packet: RadiusPacket): void {
@@ -69,20 +72,21 @@ export const rfc5580 = {
   },
 
   getAllLocationData(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5580AttributeTypes['Location_Data']);
+    return packet.getAllAttributes(rfc5580AttributeTypes['Location_Data']).map(avp => avp.value);
   },
 
   getLocationDataString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5580AttributeTypes['Location_Data']);
+    const value = this.getLocationData(packet);
     return value?.toString('utf8');
   },
 
   getBasicLocationPolicyRules(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5580AttributeTypes['Basic_Location_Policy_Rules']);
+    const avp = packet.getAttribute(rfc5580AttributeTypes['Basic_Location_Policy_Rules']);
+    return avp?.value;
   },
 
   setBasicLocationPolicyRules(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5580AttributeTypes['Basic_Location_Policy_Rules'], value);
+    packet.addAttribute({ type: rfc5580AttributeTypes['Basic_Location_Policy_Rules'], value: Buffer.from(value) });
   },
 
   deleteBasicLocationPolicyRules(packet: RadiusPacket): void {
@@ -90,20 +94,21 @@ export const rfc5580 = {
   },
 
   getAllBasicLocationPolicyRules(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5580AttributeTypes['Basic_Location_Policy_Rules']);
+    return packet.getAllAttributes(rfc5580AttributeTypes['Basic_Location_Policy_Rules']).map(avp => avp.value);
   },
 
   getBasicLocationPolicyRulesString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5580AttributeTypes['Basic_Location_Policy_Rules']);
+    const value = this.getBasicLocationPolicyRules(packet);
     return value?.toString('utf8');
   },
 
   getExtendedLocationPolicyRules(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5580AttributeTypes['Extended_Location_Policy_Rules']);
+    const avp = packet.getAttribute(rfc5580AttributeTypes['Extended_Location_Policy_Rules']);
+    return avp?.value;
   },
 
   setExtendedLocationPolicyRules(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5580AttributeTypes['Extended_Location_Policy_Rules'], value);
+    packet.addAttribute({ type: rfc5580AttributeTypes['Extended_Location_Policy_Rules'], value: Buffer.from(value) });
   },
 
   deleteExtendedLocationPolicyRules(packet: RadiusPacket): void {
@@ -111,20 +116,21 @@ export const rfc5580 = {
   },
 
   getAllExtendedLocationPolicyRules(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5580AttributeTypes['Extended_Location_Policy_Rules']);
+    return packet.getAllAttributes(rfc5580AttributeTypes['Extended_Location_Policy_Rules']).map(avp => avp.value);
   },
 
   getExtendedLocationPolicyRulesString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5580AttributeTypes['Extended_Location_Policy_Rules']);
+    const value = this.getExtendedLocationPolicyRules(packet);
     return value?.toString('utf8');
   },
 
   getLocationCapable(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5580AttributeTypes['Location_Capable']);
+    const avp = packet.getAttribute(rfc5580AttributeTypes['Location_Capable']);
+    return avp?.value;
   },
 
   setLocationCapable(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5580AttributeTypes['Location_Capable'], value);
+    packet.addAttribute({ type: rfc5580AttributeTypes['Location_Capable'], value: Buffer.from(value) });
   },
 
   deleteLocationCapable(packet: RadiusPacket): void {
@@ -132,20 +138,21 @@ export const rfc5580 = {
   },
 
   getAllLocationCapable(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5580AttributeTypes['Location_Capable']);
+    return packet.getAllAttributes(rfc5580AttributeTypes['Location_Capable']).map(avp => avp.value);
   },
 
   getLocationCapableString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5580AttributeTypes['Location_Capable']);
+    const value = this.getLocationCapable(packet);
     return value?.toString('utf8');
   },
 
   getRequestedLocationInfo(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5580AttributeTypes['Requested_Location_Info']);
+    const avp = packet.getAttribute(rfc5580AttributeTypes['Requested_Location_Info']);
+    return avp?.value;
   },
 
   setRequestedLocationInfo(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5580AttributeTypes['Requested_Location_Info'], value);
+    packet.addAttribute({ type: rfc5580AttributeTypes['Requested_Location_Info'], value: Buffer.from(value) });
   },
 
   deleteRequestedLocationInfo(packet: RadiusPacket): void {
@@ -153,11 +160,11 @@ export const rfc5580 = {
   },
 
   getAllRequestedLocationInfo(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5580AttributeTypes['Requested_Location_Info']);
+    return packet.getAllAttributes(rfc5580AttributeTypes['Requested_Location_Info']).map(avp => avp.value);
   },
 
   getRequestedLocationInfoString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5580AttributeTypes['Requested_Location_Info']);
+    const value = this.getRequestedLocationInfo(packet);
     return value?.toString('utf8');
   },
 

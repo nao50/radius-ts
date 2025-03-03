@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5904
-import { RadiusPacket } from "../packet.js";
+import { RadiusPacket } from "../radius-packet.js";
 
 export const rfc5904AttributeTypes = {
   'PKM_SS_Cert': 137,
@@ -15,11 +15,12 @@ export type rfc5904AttributeType = typeof rfc5904AttributeTypes[keyof typeof rfc
 
 export const rfc5904 = {
   getPKMSSCert(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5904AttributeTypes['PKM_SS_Cert']);
+    const avp = packet.getAttribute(rfc5904AttributeTypes['PKM_SS_Cert']);
+    return avp?.value;
   },
 
   setPKMSSCert(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5904AttributeTypes['PKM_SS_Cert'], value);
+    packet.addAttribute({ type: rfc5904AttributeTypes['PKM_SS_Cert'], value: Buffer.from(value) });
   },
 
   deletePKMSSCert(packet: RadiusPacket): void {
@@ -27,20 +28,21 @@ export const rfc5904 = {
   },
 
   getAllPKMSSCert(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_SS_Cert']);
+    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_SS_Cert']).map(avp => avp.value);
   },
 
   getPKMSSCertString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5904AttributeTypes['PKM_SS_Cert']);
+    const value = this.getPKMSSCert(packet);
     return value?.toString('utf8');
   },
 
   getPKMCACert(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5904AttributeTypes['PKM_CA_Cert']);
+    const avp = packet.getAttribute(rfc5904AttributeTypes['PKM_CA_Cert']);
+    return avp?.value;
   },
 
   setPKMCACert(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5904AttributeTypes['PKM_CA_Cert'], value);
+    packet.addAttribute({ type: rfc5904AttributeTypes['PKM_CA_Cert'], value: Buffer.from(value) });
   },
 
   deletePKMCACert(packet: RadiusPacket): void {
@@ -48,20 +50,21 @@ export const rfc5904 = {
   },
 
   getAllPKMCACert(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_CA_Cert']);
+    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_CA_Cert']).map(avp => avp.value);
   },
 
   getPKMCACertString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5904AttributeTypes['PKM_CA_Cert']);
+    const value = this.getPKMCACert(packet);
     return value?.toString('utf8');
   },
 
   getPKMConfigSettings(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5904AttributeTypes['PKM_Config_Settings']);
+    const avp = packet.getAttribute(rfc5904AttributeTypes['PKM_Config_Settings']);
+    return avp?.value;
   },
 
   setPKMConfigSettings(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5904AttributeTypes['PKM_Config_Settings'], value);
+    packet.addAttribute({ type: rfc5904AttributeTypes['PKM_Config_Settings'], value: Buffer.from(value) });
   },
 
   deletePKMConfigSettings(packet: RadiusPacket): void {
@@ -69,20 +72,21 @@ export const rfc5904 = {
   },
 
   getAllPKMConfigSettings(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_Config_Settings']);
+    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_Config_Settings']).map(avp => avp.value);
   },
 
   getPKMConfigSettingsString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5904AttributeTypes['PKM_Config_Settings']);
+    const value = this.getPKMConfigSettings(packet);
     return value?.toString('utf8');
   },
 
   getPKMCryptosuiteList(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5904AttributeTypes['PKM_Cryptosuite_List']);
+    const avp = packet.getAttribute(rfc5904AttributeTypes['PKM_Cryptosuite_List']);
+    return avp?.value;
   },
 
   setPKMCryptosuiteList(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5904AttributeTypes['PKM_Cryptosuite_List'], value);
+    packet.addAttribute({ type: rfc5904AttributeTypes['PKM_Cryptosuite_List'], value: Buffer.from(value) });
   },
 
   deletePKMCryptosuiteList(packet: RadiusPacket): void {
@@ -90,20 +94,21 @@ export const rfc5904 = {
   },
 
   getAllPKMCryptosuiteList(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_Cryptosuite_List']);
+    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_Cryptosuite_List']).map(avp => avp.value);
   },
 
   getPKMCryptosuiteListString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5904AttributeTypes['PKM_Cryptosuite_List']);
+    const value = this.getPKMCryptosuiteList(packet);
     return value?.toString('utf8');
   },
 
   getPKMSAID(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5904AttributeTypes['PKM_SAID']);
+    const avp = packet.getAttribute(rfc5904AttributeTypes['PKM_SAID']);
+    return avp?.value;
   },
 
   setPKMSAID(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5904AttributeTypes['PKM_SAID'], value);
+    packet.addAttribute({ type: rfc5904AttributeTypes['PKM_SAID'], value: Buffer.from(value) });
   },
 
   deletePKMSAID(packet: RadiusPacket): void {
@@ -111,20 +116,21 @@ export const rfc5904 = {
   },
 
   getAllPKMSAID(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_SAID']);
+    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_SAID']).map(avp => avp.value);
   },
 
   getPKMSAIDString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5904AttributeTypes['PKM_SAID']);
+    const value = this.getPKMSAID(packet);
     return value?.toString('utf8');
   },
 
   getPKMSADescriptor(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5904AttributeTypes['PKM_SA_Descriptor']);
+    const avp = packet.getAttribute(rfc5904AttributeTypes['PKM_SA_Descriptor']);
+    return avp?.value;
   },
 
   setPKMSADescriptor(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5904AttributeTypes['PKM_SA_Descriptor'], value);
+    packet.addAttribute({ type: rfc5904AttributeTypes['PKM_SA_Descriptor'], value: Buffer.from(value) });
   },
 
   deletePKMSADescriptor(packet: RadiusPacket): void {
@@ -132,20 +138,21 @@ export const rfc5904 = {
   },
 
   getAllPKMSADescriptor(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_SA_Descriptor']);
+    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_SA_Descriptor']).map(avp => avp.value);
   },
 
   getPKMSADescriptorString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5904AttributeTypes['PKM_SA_Descriptor']);
+    const value = this.getPKMSADescriptor(packet);
     return value?.toString('utf8');
   },
 
   getPKMAuthKey(packet: RadiusPacket): Buffer | undefined {
-    return packet.getAttribute(rfc5904AttributeTypes['PKM_Auth_Key']);
+    const avp = packet.getAttribute(rfc5904AttributeTypes['PKM_Auth_Key']);
+    return avp?.value;
   },
 
   setPKMAuthKey(packet: RadiusPacket, value: string | Buffer): void {
-    packet.addAttribute(rfc5904AttributeTypes['PKM_Auth_Key'], value);
+    packet.addAttribute({ type: rfc5904AttributeTypes['PKM_Auth_Key'], value: Buffer.from(value) });
   },
 
   deletePKMAuthKey(packet: RadiusPacket): void {
@@ -153,11 +160,11 @@ export const rfc5904 = {
   },
 
   getAllPKMAuthKey(packet: RadiusPacket): Buffer[] {
-    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_Auth_Key']);
+    return packet.getAllAttributes(rfc5904AttributeTypes['PKM_Auth_Key']).map(avp => avp.value);
   },
 
   getPKMAuthKeyString(packet: RadiusPacket): string | undefined {
-    const value = packet.getAttribute(rfc5904AttributeTypes['PKM_Auth_Key']);
+    const value = this.getPKMAuthKey(packet);
     return value?.toString('utf8');
   },
 
