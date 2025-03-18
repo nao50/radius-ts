@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc3580
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc3580AttributeTypes = {
 } as const;

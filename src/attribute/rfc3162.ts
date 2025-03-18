@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc3162
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc3162AttributeTypes = {
   'NAS_IPv6_Address': 95,

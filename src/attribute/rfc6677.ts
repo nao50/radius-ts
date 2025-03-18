@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc6677
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc6677AttributeTypes = {
   'EAP_Lower_Layer': 163,

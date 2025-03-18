@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4818
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc4818AttributeTypes = {
   'Delegated_IPv6_Prefix': 123,

@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4679
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc4679AttributeTypes = {
   'ADSL_Forum_DHCP_Vendor_Specific': 255,

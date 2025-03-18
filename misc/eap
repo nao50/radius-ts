@@ -7,8 +7,8 @@
 // import { EapCodes, EapTypes } from './codes';
 // import { logger } from '../src/logger';
 
-import { RadiusPacket } from './radius-packet';
-import { EapPacket } from './eap-packet';
+import { RadiusPacket } from './radius';
+import { EapPacket } from './eap-packet.ts_';
 import { rfc2865 } from './attribute/rfc2865';
 import { logger } from '../src/logger';
 import { EapCodes, EapTypes, TlsConstants, FLAG_TLS_START, FLAG_MORE_FRAGMENTS } from './codes';

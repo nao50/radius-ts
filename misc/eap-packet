@@ -2,7 +2,7 @@
 
 import { Buffer } from 'buffer';
 import { EapCode, EapCodeType, EapCodes, EapType, EapTypeType, EapTypes, FLAG_LENGTH_INCLUDED, FLAG_MORE_FRAGMENTS, FLAG_TLS_START, EAP_HEADER_LENGTH, EAP_TYPE_LENGTH, EAP_FLAGS_LENGTH, MAX_EAP_MESSAGE_SIZE } from './codes';
-import { RadiusPacket } from './radius-packet';
+import { RadiusPacket } from './radius';
 import { rfc2865 } from './attribute/rfc2865';
 import { logger } from '../src/logger';
 

@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc6572
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc6572AttributeTypes = {
   'Mobile_Node_Identifier': 145,

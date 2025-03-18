@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4675
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc4675AttributeTypes = {
   'Egress_VLANID': 56,

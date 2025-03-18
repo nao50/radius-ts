@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc6519
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc6519AttributeTypes = {
   'DS_Lite_Tunnel_Name': 144,

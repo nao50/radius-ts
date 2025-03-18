@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4072
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc4072AttributeTypes = {
   'EAP_Key_Name': 102,

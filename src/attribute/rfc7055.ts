@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc7055
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc7055AttributeTypes = {
   'GSS_Acceptor_Service_Name': 164,

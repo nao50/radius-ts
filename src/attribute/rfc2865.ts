@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc2865
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc2865AttributeTypes = {
   'User_Name': 1,

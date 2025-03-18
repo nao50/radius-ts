@@ -1,6 +1,6 @@
 // example/client.ts
 import { RadiusClient } from '../../src/client';
-import { RadiusPacket } from '../../src/radius-packet';
+import { RadiusPacket } from '../../src/radius';
 import { RadiusCodes, EapCodes, EapTypes } from '../../src/codes';
 import { rfc2865, rfc2865AttributeTypes } from '../../src/attribute/rfc2865';
 import { rfc2869, rfc2869AttributeTypes } from '../../src/attribute/rfc2869';

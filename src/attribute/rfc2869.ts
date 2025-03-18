@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc2869
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc2869AttributeTypes = {
   'Acct_Input_Gigawords': 52,

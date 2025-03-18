@@ -1,6 +1,6 @@
 // src/server.ts
 import dgram from "dgram";
-import { RadiusPacket } from "./radius-packet";
+import { RadiusPacket } from "./radius";
 
 export class RadiusServer {
 	private socket: dgram.Socket;

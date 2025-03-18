@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc2866
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc2866AttributeTypes = {
   'Acct_Status_Type': 40,

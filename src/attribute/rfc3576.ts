@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc3576
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc3576AttributeTypes = {
   'Error_Cause': 101,

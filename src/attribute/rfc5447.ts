@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5447
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc5447AttributeTypes = {
   'MIP6_Feature_Vector': 124,

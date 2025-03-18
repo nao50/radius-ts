@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc2868
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc2868AttributeTypes = {
   'Tunnel_Type': 64,

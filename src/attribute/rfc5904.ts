@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5904
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc5904AttributeTypes = {
   'PKM_SS_Cert': 137,

@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4849
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc4849AttributeTypes = {
   'NAS_Filter_Rule': 92,

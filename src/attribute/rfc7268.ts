@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc7268
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc7268AttributeTypes = {
   'Allowed_Called_Station_Id': 174,

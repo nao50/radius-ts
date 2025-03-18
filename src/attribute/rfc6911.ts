@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc6911
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc6911AttributeTypes = {
   'Framed_IPv6_Address': 168,

@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5580
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc5580AttributeTypes = {
   'Operator_Name': 126,

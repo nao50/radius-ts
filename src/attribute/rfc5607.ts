@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc5607
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc5607AttributeTypes = {
   'Framed_Management': 133,

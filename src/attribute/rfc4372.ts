@@ -1,5 +1,5 @@
 // Generated from dictionary.rfc4372
-import { RadiusPacket } from "../radius-packet.js";
+import { RadiusPacket } from "../radius.js";
 
 export const rfc4372AttributeTypes = {
   'Chargeable_User_Identity': 89,
